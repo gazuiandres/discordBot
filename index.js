@@ -6,12 +6,16 @@ const {TOKEN, CLIENT_ID }= process.env
 
 const commands = [
     {
-      name: 'ls',
-      description: 'Replies with something!',
+      name: 'start',
+      description: 'Init minecraft server!',
+    },
+    {
+      name: 'stop',
+      description: 'Stop minecraft server',
     },
     {
       name: 'status',
-      description: 'Show server status'
+      description: 'Show minecraft server status'
     }
   ];
   
@@ -36,7 +40,7 @@ client.on('ready', async () => {
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isChatInputCommand) return;
 
-    if (interaction.commandName === 'ls') {
+    if (interaction.commandName === 'start') {
         const member = interaction.guild.members.cache.get(interaction.user.id)
         const role = interaction.guild.roles.cache.find(role => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――");
         const isAdmin = member.roles.cache.has(role.id)
@@ -46,15 +50,35 @@ client.on('interactionCreate', async (interaction) => {
             return
         }
 
-        exec('ls -l', async (err, stdout, stderr) => {
+        exec('pm2 start server', async (err, stdout, stderr) => {
             if(err) {
                 console.log('err in exec ', err)
                 await interaction.reply('something goes wrong');
                 return;
             }
-            await interaction.reply(stdout);
+            await interaction.reply('iniciando servidor');
         })
     }
+
+    if (interaction.commandName === 'stop') {
+      const member = interaction.guild.members.cache.get(interaction.user.id)
+      const role = interaction.guild.roles.cache.find(role => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――");
+      const isAdmin = member.roles.cache.has(role.id)
+
+      if(!isAdmin) {
+          interaction.reply('No tienes permisos para esta acción')
+          return
+      }
+
+      exec('pm2 stop server', async (err, stdout, stderr) => {
+          if(err) {
+              console.log('err in exec ', err)
+              await interaction.reply('something goes wrong');
+              return;
+          }
+          await interaction.reply('apagando servidor');
+      })
+  }
 
     if (interaction.commandName === 'status') {
 
