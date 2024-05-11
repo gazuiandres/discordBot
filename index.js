@@ -58,7 +58,7 @@ client.on('interactionCreate', async (interaction) => {
 
     if (interaction.commandName === 'status') {
 
-      exec('pm2 describe bot | grep status', async (err, stdout, stderr) => {
+      exec('pm2 describe server | grep status', async (err, stdout, stderr) => {
           if(err) {
               console.log('err in exec ', err)
               await interaction.reply('something goes wrong');
