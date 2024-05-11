@@ -31,14 +31,14 @@ client.on('interactionCreate', async (interaction) => {
     if (!interaction.isChatInputCommand) return;
 
     if (interaction.commandName === 'ls') {
-        // const member = interaction.guild.members.cache.get(interaction.user.id)
-        // const role = interaction.guild.roles.cache.find(role => role.name === "Dioses");
-        // const isAdmin = member.roles.cache.has(role.id)
+        const member = interaction.guild.members.cache.get(interaction.user.id)
+        const role = interaction.guild.roles.cache.find(role => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――");
+        const isAdmin = member.roles.cache.has(role.id)
 
-        // if(!isAdmin) {
-        //     interaction.reply('No tienes permisos para esta acción')
-        //     return
-        // }
+        if(!isAdmin) {
+            interaction.reply('No tienes permisos para esta acción')
+            return
+        }
 
         exec('ls -l', async (err, stdout, stderr) => {
             if(err) {
