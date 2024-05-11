@@ -9,6 +9,10 @@ const commands = [
       name: 'ls',
       description: 'Replies with something!',
     },
+    {
+      name: 'status',
+      description: 'Show server status'
+    }
   ];
   
   const rest = new REST({ version: '10' }).setToken(TOKEN);
@@ -49,6 +53,18 @@ client.on('interactionCreate', async (interaction) => {
             await interaction.reply(stdout);
         })
     }
+
+    if (interaction.commandName === 'status') {
+
+      exec('pm2 describe bot | grep status', async (err, stdout, stderr) => {
+          if(err) {
+              console.log('err in exec ', err)
+              await interaction.reply('something goes wrong');
+              return;
+          }
+          await interaction.reply(stdout);
+      })
+  }
 })
 
 client.login(TOKEN).catch((err) => {
