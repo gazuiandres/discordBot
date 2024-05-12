@@ -80,16 +80,16 @@ client.on('interactionCreate', async (interaction) => {
       })
   }
 
-    if (interaction.commandName === 'status') {
-
-      exec('pm2 describe server | grep status', async (err, stdout, stderr) => {
-          if(err) {
-              console.log('err in exec ', err)
-              await interaction.reply('something goes wrong');
-              return;
-          }
-          await interaction.reply(stdout);
-      })
+  if (interaction.commandName === 'status') {
+    try {
+      const res = await fetch("https://mcapi.us/server/status?ip=40.233.21.156");
+      const data = await res.json();
+      const status = data.online ? 'online' : 'off'
+      interaction.reply(`status: ${status}`)
+    } catch (error) {
+      console.log('Error verificando status: ', error)
+      interaction.reply('Ocurrio un error verificando status')
+    }
   }
 })
 
