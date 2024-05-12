@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits, REST, Routes} = require('discord.js')
 const {exec} = require('child_process')
 const client =  new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const {TOKEN, CLIENT_ID }= process.env
+const {TOKEN, CLIENT_ID, SERVER_IP }= process.env
 
 const commands = [
     {
@@ -82,7 +82,7 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.commandName === 'status') {
     try {
-      const res = await fetch("https://mcapi.us/server/status?ip=40.233.21.156");
+      const res = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
       const data = await res.json();
       const status = data.online ? 'online' : 'off'
       interaction.reply(`status: ${status}`)
