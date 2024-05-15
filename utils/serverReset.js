@@ -1,5 +1,5 @@
 const {exec} = require('child_process')
-const clientReady = required('../index.js')
+const clientReady = require('../index.js')
 
 const resetServer = () => {
     // exec('pm2 stop server', async (err, stdout, stderr) => {
