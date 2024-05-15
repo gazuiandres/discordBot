@@ -18,6 +18,9 @@ const resetServer = () => {
     // })
 
     console.log('probando reset cada 30 segundos')
+    setTimeout(() => {
+        console.log('set time for cron')
+    }, 2);
 }
 
 module.exports = resetServer
