@@ -9,7 +9,7 @@ const resetServer = (client) => {
   );
 
   if (!channel) return;
-  channel.send("@Minecraft probando bot");
+  channel.send(`<@&1240396602624049344> probando mensaje del bot`);
   setTimeout(() => {
     //   console.log('Reiniciando servidor')
     //   exec('pm2 restart server', async (err, stdout, stderr) => {
@@ -20,7 +20,7 @@ const resetServer = (client) => {
     //       console.log('Servidor reiniciado')
     //   })
     channel.send("simulando reseteo automatico, no se asusten");
-  }, 30000);
+  }, 15000);
   
 };
 

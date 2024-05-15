@@ -10,7 +10,7 @@ const initLog = (client) => {
 // });
 // console.log(client)
 
-cron.schedule("*/15 * * * * *", () => serverReset(client));
+cron.schedule("*/20 * * * * *", () => serverReset(client));
 
 // console.log('cronjob activado')
 }
