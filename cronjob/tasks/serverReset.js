@@ -26,7 +26,7 @@ const resetServer = (client) => {
     (channel) => channel.name === "minecraft-server"
   );
 
-  if (channel) return;
+  if (!channel) return;
   channel.send("probando mensajes con el bot, no se asusten 🥸");
 };
 
