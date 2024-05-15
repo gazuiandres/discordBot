@@ -1,7 +1,6 @@
 const {exec} = require('child_process')
-const clientReady = require('../index.js')
 
-const resetServer = () => {
+const resetServer = (client) => {
     // exec('pm2 stop server', async (err, stdout, stderr) => {
     //     if(err) {
     //         console.log('err reseteando el servidor ', err)
@@ -19,7 +18,7 @@ const resetServer = () => {
     //         console.log('Servidor reiniciado')
     //     })
     // }, 30000);
-    console.log(clientReady.guilds.cache)
+    console.log(client.guilds.cache)
 }
 
 module.exports = resetServer
