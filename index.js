@@ -80,6 +80,26 @@ client.on('interactionCreate', async (interaction) => {
       })
   }
 
+  if (interaction.commandName === 'restart') {
+    const member = interaction.guild.members.cache.get(interaction.user.id)
+    const role = interaction.guild.roles.cache.find(role => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――");
+    const isAdmin = member.roles.cache.has(role.id)
+
+    if(!isAdmin) {
+        interaction.reply('No tienes permisos para esta acción')
+        return
+    }
+
+    exec('pm2 restart server', async (err, stdout, stderr) => {
+        if(err) {
+            console.log('err in exec ', err)
+            await interaction.reply('something goes wrong');
+            return;
+        }
+        await interaction.reply('reiniciando servidor');
+    })
+}
+
   if (interaction.commandName === 'status') {
     try {
       const res = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
