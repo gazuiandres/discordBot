@@ -1,18 +1,16 @@
 const cron = require("node-cron");
 
-
 const serverReset = require("./tasks/serverReset");
 
-
 const initLog = (client) => {
-  // console.log('cronjob activado')
-  cron.schedule("31 14 * * *", () => serverReset(client), {
-  timezone: "America/Mexico_City",
-});
-// console.log(client)
+  console.log('cronjob activado')
+  cron.schedule("0 6 * * *", () => serverReset(client), {
+    timezone: "America/Mexico_City",
+  });
 
-// cron.schedule("*/20 * * * * *", () => serverReset(client));
+  cron.schedule("0 18 * * *", () => serverReset(client), {
+    timezone: "America/Mexico_City",
+  });
+};
 
-}
-
-module.exports = initLog
+module.exports = initLog;
