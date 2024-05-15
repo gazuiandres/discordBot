@@ -126,3 +126,5 @@ client.login(TOKEN)
 .catch((err) => {
     console.log('Error al iniciar el bot ', (err))
 })
+
+module.exports = clientReady

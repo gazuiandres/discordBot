@@ -1,4 +1,5 @@
 const {exec} = require('child_process')
+import clientReady from '..'
 
 const resetServer = () => {
     // exec('pm2 stop server', async (err, stdout, stderr) => {
@@ -18,6 +19,7 @@ const resetServer = () => {
     //         console.log('Servidor reiniciado')
     //     })
     // }, 30000);
+    console.log(clientReady.guilds.cache)
 }
 
 module.exports = resetServer
