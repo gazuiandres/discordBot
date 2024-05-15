@@ -1,5 +1,5 @@
 const {exec} = require('child_process')
-
+const { GUILD_ID } = process.env
 const resetServer = (client) => {
     // exec('pm2 stop server', async (err, stdout, stderr) => {
     //     if(err) {
@@ -18,7 +18,7 @@ const resetServer = (client) => {
     //         console.log('Servidor reiniciado')
     //     })
     // }, 30000);
-    console.log(client.guilds.cache)
+    console.log(client.guilds.cache.find(guild => guild.id === GUILD_ID))
 }
 
 module.exports = resetServer
