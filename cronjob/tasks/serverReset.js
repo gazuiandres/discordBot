@@ -9,19 +9,20 @@ const resetServer = (client) => {
   );
 
   if (!channel) return;
-  channel.send(`<@&1240396602624049344> probando mensaje del bot`);
+  channel.send(
+    `<@&1240396602624049344> El servidor se reiniciara por mantenimiento en 3 minutos, tomen sus precauciones 🙆‍♂️`
+  );
   setTimeout(() => {
-    //   console.log('Reiniciando servidor')
-    //   exec('pm2 restart server', async (err, stdout, stderr) => {
-    //       if(err) {
-    //           console.log('err reseteando el servidor ', err)
-    //           return;
-    //       }
-    //       console.log('Servidor reiniciado')
-    //   })
-    channel.send("simulando reseteo automatico, no se asusten");
-  }, 15000);
-  
+    console.log("Reiniciando servidor");
+    exec("pm2 restart server", async (err, stdout, stderr) => {
+      if (err) {
+        console.log("err reseteando el servidor ", err);
+        return;
+      }
+      console.log("Servidor reiniciado");
+    });
+    channel.send("<@&1240396602624049344> Servidor inciando nuevamente");
+  }, 180000);
 };
 
 module.exports = resetServer;
