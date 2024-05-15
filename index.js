@@ -16,6 +16,10 @@ const commands = [
     {
       name: 'status',
       description: 'Show minecraft server status'
+    },
+    {
+      name: 'restart',
+      description: 'Restart minecraft server'
     }
   ];
   
