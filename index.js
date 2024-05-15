@@ -4,6 +4,8 @@ const client =  new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const {TOKEN, CLIENT_ID, SERVER_IP }= process.env
 
+let clientReady = null
+
 const commands = [
     {
       name: 'start',
@@ -117,6 +119,10 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
-client.login(TOKEN).catch((err) => {
+client.login(TOKEN)
+.then(() => {
+  clientReady = client
+})
+.catch((err) => {
     console.log('Error al iniciar el bot ', (err))
 })
