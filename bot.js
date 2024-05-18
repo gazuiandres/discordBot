@@ -116,7 +116,7 @@ client.on("interactionCreate", async (interaction) => {
 
   if (interaction.commandName === "status") {
     try {
-      const res = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
+      const res = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
       const data = await res.json();
       const status = data.online ? "online" : "off";
       interaction.reply(`status: ${status}`);
@@ -128,9 +128,9 @@ client.on("interactionCreate", async (interaction) => {
 
   if (interaction.commandName === "players") {
     try {
-      const res = await fetch(`https://mcapi.us/server/status?ip=${SERVER_IP}`);
+      const res = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
       const data = await res.json();
-      const players = data.players.sample;
+      const players = data.players.list;
       if (players.length === 0) {
         interaction.reply("No hay jugadores activos en este momento.");
         return;
@@ -138,7 +138,7 @@ client.on("interactionCreate", async (interaction) => {
 
       const playersName = players.map((player) => `${player.name}`).join('\n');
 
-      interaction.reply(playersName);
+      interaction.reply(`Hay ${data.players.online} jugadores conectados:\n${playersName}`);
 
     } catch (error) {
       console.log("Error verificando players: ", error);
