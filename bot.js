@@ -130,15 +130,15 @@ client.on("interactionCreate", async (interaction) => {
     try {
       const res = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
       const data = await res.json();
-      const players = data.players.list;
-      if (players.length === 0) {
+      const players = data.players;
+      if (players.online === 0) {
         interaction.reply("No hay jugadores activos en este momento.");
         return;
       }
 
       const playersName = players.map((player) => `${player.name}`).join('\n');
 
-      interaction.reply(`Hay ${data.players.online} jugadores conectados:\n${playersName}`);
+      interaction.reply(`Hay ${players.online} jugadores conectados:\n${playersName}`);
 
     } catch (error) {
       console.log("Error verificando players: ", error);
