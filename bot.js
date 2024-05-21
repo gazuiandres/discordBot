@@ -131,7 +131,7 @@ client.on("interactionCreate", async (interaction) => {
       const res = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
       const data = await res.json();
       const players = data.players;
-      if (!players?.list.length || players.online === 0) {
+      if (!players.list || players.online === 0) {
         interaction.reply("No hay jugadores activos en este momento.");
         return;
       }
