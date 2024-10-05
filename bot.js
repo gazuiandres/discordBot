@@ -2,6 +2,8 @@ const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const { exec } = require("child_process");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+const twitchJob = require("./jobs/twitchJobs");
+
 const { TOKEN, CLIENT_ID, SERVER_IP } = process.env;
 
 const commands = [
@@ -24,6 +26,11 @@ const commands = [
   {
     name: "players",
     description: "Show the active players in the minecraft server",
+  },
+
+  {
+    name: "viewers",
+    description: "Show the active viewers in the twitch stream",
   },
 ];
 
@@ -146,6 +153,28 @@ client.on("interactionCreate", async (interaction) => {
     } catch (error) {
       console.log("Error verificando players: ", error);
       interaction.reply("Ocurrio un error verificando players");
+    }
+  }
+
+  if (interaction.commandName === "viewers") {
+    const member = interaction.guild.members.cache.get(interaction.user.id);
+    const role = interaction.guild.roles.cache.find(
+      (role) => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――"
+    );
+    const isAdmin = member.roles.cache.has(role.id);
+
+    if (!isAdmin) {
+      interaction.reply("No tienes permisos para esta acción");
+      return;
+    }
+
+    twitchJob.emit("get-viewers-list", (list) => {
+      interaction.user.send(`${list}`);
+    });
+    interaction.reply("Cargando viewers... ");
+    try {
+    } catch (error) {
+      interaction.reply("Algo ocurrio mal :(");
     }
   }
 });
