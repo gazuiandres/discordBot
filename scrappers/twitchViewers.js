@@ -15,7 +15,7 @@ const getTwitchViwers = async () => {
     await page.waitForTimeout(4000)
     const viewersElements = page.locator('.ScCoreLink-sc-16kq0mq-0.esnIuC');
     const viewers = await viewersElements.evaluateAll(
-        list => list.map(element => element.textContent).join("\n"));
+        list => list.map(element => element.textContent));
     browser.close()
     return viewers
 }

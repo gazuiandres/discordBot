@@ -3,6 +3,7 @@ const { exec } = require("child_process");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const twitchJob = require("./jobs/twitchJobs");
+const verifyNames = require("./utils/verifyNames");
 
 const { TOKEN, CLIENT_ID, SERVER_IP } = process.env;
 
@@ -169,7 +170,8 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     twitchJob.emit("get-viewers-list", (list) => {
-      interaction.user.send(`${list}`);
+      const listFiltered = list.filter((name) => !verifyNames(name, ['Nightbot', 'Sery_bot', 'Streamelements'])).join("\n")
+      interaction.user.send(`${listFiltered}`);
     });
     interaction.reply("Cargando viewers... ");
     try {
