@@ -160,7 +160,7 @@ client.on("interactionCreate", async (interaction) => {
   if (interaction.commandName === "viewers") {
     const member = interaction.guild.members.cache.get(interaction.user.id);
     const role = interaction.guild.roles.cache.find(
-      (role) => role.name === "―― ♡ ┆ㅤ𝙲𝚘𝚛𝚘𝚗𝚊ㅤ ――"
+      (role) => role.id === "313775100090515469"
     );
     const isAdmin = member.roles.cache.has(role.id);
 
@@ -171,6 +171,10 @@ client.on("interactionCreate", async (interaction) => {
 
     twitchJob.emit("get-viewers-list", (list) => {
       const listFiltered = list.filter((name) => !verifyNames(name, ['Nightbot', 'Sery_bot', 'Streamelements'])).join("\n")
+      if(listFiltered.length === 0) {
+        interaction.user.send(`0 viewers disponibles`);
+        return;
+      }
       interaction.user.send(`${listFiltered}`);
     });
     interaction.reply("Cargando viewers... ");
