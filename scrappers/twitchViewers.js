@@ -9,7 +9,7 @@ const getTwitchViwers = async () => {
 
     const page = await browser.newPage();
 
-    await page.goto("https://www.twitch.tv/mioshi");
+    await page.goto("https://www.twitch.tv/alehahze");
     await page.waitForLoadState('domcontentloaded')
     await page.click('[data-test-selector="chat-viewer-list"]');
     await page.waitForTimeout(4000)
